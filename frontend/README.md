@@ -78,6 +78,7 @@ src/
 │   └── ui/
 │       ├── ServiceTierCard.tsx    B2B service tier display card
 │       ├── PolaroidCard.tsx       Team photo polaroid-style card
+│       ├── PaperTexture.tsx       Fixed grain/crinkle/vignette overlays
 │       └── *.css                  Co-located component styles
 ├── pages/
 │   ├── HomePage.tsx
@@ -128,7 +129,12 @@ All design tokens live in `src/styles/variables.css` and are consumed globally v
 | `--border-thin` | `1px solid #d4cfc4` | All borders |
 | `--transition-base` | `200ms ease` | Interactive elements |
 
-**Texture:** SVG fractal noise `feTurbulence` filter applied at `opacity: 0.04` on the body and `opacity: 0.12–0.15` on hero/carousel overlays.
+**Texture:** Three fixed-position overlay layers via the `PaperTexture` component:
+- **Fine grain** — SVG `feTurbulence` (baseFrequency 0.65, 4 octaves) at full SVG opacity + CSS `filter: contrast(400%) brightness(150%)` + `mix-blend-mode: multiply` — collapses gray noise into stark black micro-dots (real paper grain)
+- **Coarse crinkle** — low-frequency noise (0.12) at large tile size for paper fold / tonal variation
+- **Warm vignette** — radial gradient darkening page edges with sienna brown for an aged, worn-paper feel
+
+Hero and card overlays use the same contrast-boost technique with `mix-blend-mode: screen` for dark backgrounds.
 
 ## Forms
 
