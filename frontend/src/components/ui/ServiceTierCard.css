@@ -1,0 +1,64 @@
+/* Service Tier Card */
+.service-tier {
+  border: var(--border-thin);
+  padding: var(--space-8);
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.service-tier:hover {
+  border-color: var(--color-green);
+  background-color: var(--color-surface);
+}
+
+.service-tier__icon {
+  width: 40px;
+  height: 40px;
+  border: var(--border-thin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-green);
+}
+
+.service-tier__title {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.service-tier__description {
+  font-size: var(--text-base);
+  line-height: 1.65;
+  max-width: none;
+}
+
+.service-tier__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: var(--border-thin);
+}
+
+.service-tier__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.service-tier__feature::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  min-width: 5px;
+  border-radius: 50%;
+  background-color: var(--color-sienna);
+  margin-top: 6px;
+}

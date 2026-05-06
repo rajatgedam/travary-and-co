@@ -1,0 +1,81 @@
+/* Vision Section */
+.vision {
+  padding-block: var(--section-pad-y);
+  border-bottom: var(--border-thin);
+  background-color: var(--color-green);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.vision__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.vision__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.55);
+  margin-bottom: var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.vision__eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: rgba(244, 241, 234, 0.4);
+}
+
+.vision__title {
+  color: var(--color-bg);
+  font-size: var(--text-4xl);
+}
+
+.vision__body {
+  color: rgba(244, 241, 234, 0.75);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  margin-top: var(--space-5);
+  max-width: 60ch;
+}
+
+.vision__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.vision__stat {
+  border: 1px solid rgba(244, 241, 234, 0.15);
+  padding: var(--space-6);
+}
+
+.vision__stat-number {
+  font-family: var(--font-serif);
+  font-size: var(--text-4xl);
+  font-weight: 900;
+  color: var(--color-bg);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.vision__stat-label {
+  font-size: var(--text-sm);
+  color: rgba(244, 241, 234, 0.6);
+  font-family: var(--font-sans);
+}
+
+@media (max-width: 900px) {
+  .vision__inner { grid-template-columns: 1fr; gap: var(--space-10); }
+  .vision__title { font-size: var(--text-3xl); }
+}

@@ -1,0 +1,38 @@
+/* Team Section */
+.team-section {
+  padding-block: var(--section-pad-y);
+  border-bottom: var(--border-thin);
+}
+
+.team-section__header {
+  margin-bottom: var(--space-12);
+}
+
+.team-section__header h2 {
+  margin-bottom: var(--space-3);
+}
+
+.team-section__header p {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+}
+
+.team-section__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+/* Slight rotations for the polaroid-on-a-corkboard feel */
+.team-section__grid .polaroid:nth-child(1) { transform: rotate(-1.5deg); }
+.team-section__grid .polaroid:nth-child(2) { transform: rotate(1deg); }
+.team-section__grid .polaroid:nth-child(3) { transform: rotate(-0.8deg); }
+.team-section__grid .polaroid:nth-child(4) { transform: rotate(1.2deg); }
+
+@media (max-width: 900px) {
+  .team-section__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .team-section__grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+}

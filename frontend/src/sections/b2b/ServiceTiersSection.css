@@ -1,0 +1,30 @@
+/* Service Tiers Section */
+.service-tiers {
+  padding-block: var(--section-pad-y);
+  border-bottom: var(--border-thin);
+}
+
+.service-tiers__header {
+  margin-bottom: var(--space-12);
+  max-width: 52ch;
+}
+
+.service-tiers__subtitle {
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
+  line-height: 1.65;
+}
+
+.service-tiers__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 900px) {
+  .service-tiers__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .service-tiers__grid { grid-template-columns: 1fr; }
+}

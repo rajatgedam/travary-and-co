@@ -1,0 +1,106 @@
+/* Footer */
+.footer {
+  border-top: var(--border-thin);
+  background-color: var(--color-bg-dark);
+  margin-top: auto;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  padding-block: var(--space-16);
+  align-items: start;
+}
+
+.footer__brand {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  display: block;
+  margin-bottom: var(--space-3);
+  font-variation-settings: 'SOFT' 80;
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: 36ch;
+}
+
+.footer__newsletter-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.footer__newsletter-form {
+  display: flex;
+  gap: 0;
+  border: var(--border-thin);
+  max-width: 360px;
+}
+
+.footer__newsletter-input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.footer__newsletter-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.footer__newsletter-btn {
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--color-green);
+  color: var(--color-white);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast);
+}
+
+.footer__newsletter-btn:hover {
+  background-color: var(--color-green-light);
+}
+
+.footer__newsletter-btn:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+.footer__bottom {
+  border-top: var(--border-thin);
+  padding-block: var(--space-5);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .footer__newsletter-form {
+    max-width: 100%;
+  }
+}
