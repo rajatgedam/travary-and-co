@@ -2,6 +2,22 @@
 
 High-end travel website with a "crushed paper" / parchment aesthetic. Built with React 19, Vite, and TypeScript.
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Scripts](#scripts)
+- [Tech Stack](#tech-stack)
+- [Pages & Routes](#pages--routes)
+- [Project Structure](#project-structure)
+- [Design System](#design-system)
+- [Forms](#forms)
+- [Environment Variables](#environment-variables)
+- [Production Build](#production-build)
+- [Deployment](#deployment)
+- [Browser Support](#browser-support)
+- [Contributing](#contributing)
+- [Test Coverage](#test-coverage)
+
 ## Quick Start
 
 ```bash
@@ -205,4 +221,50 @@ Test Files  6 passed (6)
      Tests  28 passed (28)
 ```
 
-Tests cover: form validation, success states, error clearing, Navbar toggle, Footer newsletter, component rendering and ARIA attributes.
+| Suite | File | What's tested |
+|---|---|---|
+| Navbar | `tests/components/Navbar.test.tsx` | Renders brand + 4 links, hamburger toggle, aria-expanded |
+| Footer | `tests/components/Footer.test.tsx` | Newsletter submit, success state, empty guard |
+| ServiceTierCard | `tests/components/ServiceTierCard.test.tsx` | Title, description, features list, icon, aria-label |
+| PolaroidCard | `tests/components/PolaroidCard.test.tsx` | Name, role, initials, accessible figure label |
+| PartnershipForm | `tests/sections/PartnershipForm.test.tsx` | Required field validation, email format, error clearing, success state |
+| InquiryForm | `tests/sections/InquiryForm.test.tsx` | Required field validation, email format, error clearing, success state |
+
+## Browser Support
+
+| Browser | Minimum version |
+|---|---|
+| Chrome / Edge | 105+ |
+| Firefox | 106+ |
+| Safari | 16+ |
+| Mobile Safari (iOS) | 16+ |
+
+Uses CSS custom properties, `min-height: 100svh`, `aspect-ratio`, and `grid` — all baseline-supported in the above targets. No polyfills required.
+
+## Contributing
+
+```bash
+# 1. Clone and install
+git clone https://github.com/YOUR_USERNAME/journey-and-co.git
+cd journey-and-co/frontend
+npm install
+
+# 2. Create a feature branch
+git checkout -b feat/your-feature-name
+
+# 3. Develop
+npm run dev
+
+# 4. Verify before pushing
+npm test          # all tests must pass
+npm run lint      # no lint errors
+npm run build     # no TypeScript errors
+
+# 5. Open a pull request — Vercel will post a preview URL automatically
+```
+
+**Branch conventions:**
+- `feat/` — new features
+- `fix/` — bug fixes
+- `chore/` — deps, config, tooling
+
