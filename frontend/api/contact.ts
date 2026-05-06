@@ -3,6 +3,12 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Set in Vercel → Project Settings → Environment Variables
+// RESEND_FROM:    e.g. "Travary & Co. <noreply@travaryandco.com>"  (must be a Resend-verified domain)
+// CONTACT_TO:     e.g. "hello@travaryandco.com"  (inbox that receives inquiries)
+const FROM = process.env.RESEND_FROM ?? 'onboarding@resend.dev';
+const TO   = process.env.CONTACT_TO  ?? '';
+
 interface ContactPayload {
   name: string;
   email: string;
@@ -24,9 +30,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   if (!destination?.trim()) return res.status(400).json({ error: 'Destination is required.' });
 
+  if (!TO) {
+    console.error('CONTACT_TO env var is not set');
+    return res.status(500).json({ error: 'Server misconfiguration. Please contact us directly.' });
+  }
+
   const { error } = await resend.emails.send({
-    from: 'Travary & Co. <noreply@travaryandco.com>',
-    to: 'hello@travaryandco.com',
+    from: FROM,
+    to: TO,
     replyTo: email,
     subject: `New inquiry from ${name}`,
     text: [

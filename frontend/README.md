@@ -170,11 +170,22 @@ To enable real form delivery (Phase 10), add the following to a `.env.local` fil
 ```bash
 # .env.local
 RESEND_API_KEY=re_xxxxxxxxxxxx
+
+# "from" address — domain must be verified in your Resend account dashboard
+# Until verified, use Resend's sandbox: onboarding@resend.dev
+RESEND_FROM="Travary & Co. <noreply@travaryandco.com>"
+
+# "to" addresses — real inboxes you control
+CONTACT_TO=hello@travaryandco.com
+PARTNERSHIP_TO=partnerships@travaryandco.com
 ```
 
-On Vercel: **Project Settings → Environment Variables** → add `RESEND_API_KEY` for Production + Preview.
+On Vercel: **Project Settings → Environment Variables** → add all four for Production + Preview.
 
-The key is used exclusively inside `api/contact.ts` and `api/partnership.ts` (serverless functions) — it is never exposed to the browser bundle.
+**Resend domain setup (one-time):**
+1. Sign up at [resend.com](https://resend.com) → **Domains** → Add `travaryandco.com`
+2. Add the DNS records Resend provides (SPF, DKIM, DMARC) to your domain registrar
+3. Once verified, the `RESEND_FROM` address will work. Until then, use `onboarding@resend.dev` as `RESEND_FROM` — Resend allows this for testing but emails will show as sent from their domain.
 
 ## Production Build
 
