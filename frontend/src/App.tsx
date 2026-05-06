@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import PaperTexture from './components/ui/PaperTexture';
 import HomePage from './pages/HomePage';
 import B2BTripsPage from './pages/B2BTripsPage';
 import AboutUsPage from './pages/AboutUsPage';
@@ -10,6 +11,7 @@ import './App.css';
 export default function App() {
   return (
     <BrowserRouter>
+      <PaperTexture />
       <Navbar />
       <main id="main-content">
         <Routes>
