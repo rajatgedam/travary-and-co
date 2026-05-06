@@ -109,6 +109,16 @@
   margin-top: -var(--space-1);
 }
 
+.form-error--server {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .form-submit {
   display: inline-flex;
   align-items: center;

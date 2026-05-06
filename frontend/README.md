@@ -252,7 +252,7 @@ server {
 
 ```
 Test Files  6 passed (6)
-     Tests  28 passed (28)
+     Tests  34 passed (34)
 ```
 
 | Suite | File | What's tested |
@@ -261,8 +261,8 @@ Test Files  6 passed (6)
 | Footer | `tests/components/Footer.test.tsx` | Newsletter submit, success state, empty guard |
 | ServiceTierCard | `tests/components/ServiceTierCard.test.tsx` | Title, description, features list, icon, aria-label |
 | PolaroidCard | `tests/components/PolaroidCard.test.tsx` | Name, role, initials, accessible figure label |
-| PartnershipForm | `tests/sections/PartnershipForm.test.tsx` | Required field validation, email format, error clearing, success state |
-| InquiryForm | `tests/sections/InquiryForm.test.tsx` | Required field validation, email format, error clearing, success state |
+| PartnershipForm | `tests/sections/PartnershipForm.test.tsx` | Required field validation, email format, error clearing, loading state, server error, network error, success state |
+| InquiryForm | `tests/sections/InquiryForm.test.tsx` | Required field validation, email format, error clearing, loading state, server error, network error, success state |
 
 ## Future Improvements
 

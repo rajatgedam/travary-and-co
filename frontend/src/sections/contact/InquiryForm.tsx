@@ -33,6 +33,8 @@ export default function InquiryForm() {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -42,16 +44,34 @@ export default function InquiryForm() {
     }
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const validation = validate(form);
     if (Object.keys(validation).length > 0) {
       setErrors(validation);
       return;
     }
-    setSubmitted(true);
-    setForm(EMPTY);
-    setErrors({});
+    setLoading(true);
+    setServerError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setServerError((data as { error?: string }).error ?? 'Something went wrong. Please try again.');
+        return;
+      }
+      setSubmitted(true);
+      setForm(EMPTY);
+      setErrors({});
+    } catch {
+      setServerError('Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -136,12 +156,15 @@ export default function InquiryForm() {
               {errors.destination && <span id="i-dest-error" className="form-error" role="alert">{errors.destination}</span>}
             </div>
 
-            <button type="submit" className="form-submit">
-              Send Message
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+            <button type="submit" className="form-submit" disabled={loading}>
+              {loading ? 'Sending…' : 'Send Message'}
+              {!loading && (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
             </button>
+            {serverError && <p className="form-error form-error--server" role="alert">{serverError}</p>}
           </form>
         )}
       </div>

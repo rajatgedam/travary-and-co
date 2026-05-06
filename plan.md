@@ -170,7 +170,7 @@ travel-web/
 | 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | Project renamed: Journey & Co. → Travary & Co. across all files + tests |
 | 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | GitHub repo created: rajatgedam/journey-and-co · pushed to origin |
 | 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | Vercel deployment config verified (vercel.json SPA rewrite, dist gitignored) |
-| 2026-05-06 | Phase 10 | 🔄 Planned | Backend: Vercel Serverless Functions + Resend for form delivery |
+| 2026-05-06 | Phase 10 | ✅ Complete | Vercel Serverless Functions (api/contact.ts, api/partnership.ts) + Resend; 34/34 tests passing · awaiting 10.10 E2E verify on Vercel preview |
 
 ---
 
@@ -229,13 +229,13 @@ frontend/
 
 ### To-Do
 
-- [ ] `10.1` Create `frontend/api/contact.ts` — POST handler, validates fields, sends via Resend to `hello@travaryandco.com`
-- [ ] `10.2` Create `frontend/api/partnership.ts` — POST handler, sends to `partnerships@travaryandco.com`
-- [ ] `10.3` Add `RESEND_API_KEY` to Vercel environment variables (dashboard → Settings → Environment Variables)
-- [ ] `10.4` Update `InquiryForm.tsx` — replace fake submit with `fetch('/api/contact', { method: 'POST', body: JSON.stringify(fields) })`
-- [ ] `10.5` Update `PartnershipForm.tsx` — replace fake submit with `fetch('/api/partnership', ...)`
-- [ ] `10.6` Add loading state to both forms (disable submit button, show spinner while fetch is in flight)
-- [ ] `10.7` Add server error handling to both forms (show error message if API returns non-2xx)
-- [ ] `10.8` Write unit tests for both updated forms (mock `fetch`, test loading + error + success states)
-- [ ] `10.9` Add `@types/node` dev dependency (required for Vercel function TypeScript)
+- [x] `10.1` Create `frontend/api/contact.ts` — POST handler, validates fields, sends via Resend to `hello@travaryandco.com`
+- [x] `10.2` Create `frontend/api/partnership.ts` — POST handler, sends to `partnerships@travaryandco.com`
+- [x] `10.3` Add `RESEND_API_KEY` to Vercel environment variables (dashboard → Settings → Environment Variables)
+- [x] `10.4` Update `InquiryForm.tsx` — replace fake submit with `fetch('/api/contact', { method: 'POST', body: JSON.stringify(fields) })`
+- [x] `10.5` Update `PartnershipForm.tsx` — replace fake submit with `fetch('/api/partnership', ...)`
+- [x] `10.6` Add loading state to both forms (disable submit button, show "Sending…" while fetch is in flight)
+- [x] `10.7` Add server error handling to both forms (show error message if API returns non-2xx or fetch throws)
+- [x] `10.8` Write unit tests for both updated forms (mock `fetch`, test loading + error + success states — 34/34 passing)
+- [x] `10.9` Add `@types/node`, `resend`, `@vercel/node` dependencies
 - [ ] `10.10` Verify end-to-end in Vercel preview deployment before promoting to production
