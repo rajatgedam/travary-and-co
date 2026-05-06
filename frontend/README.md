@@ -49,6 +49,7 @@ npm run dev        # http://localhost:5173
 | Carousel | Embla Carousel | Lightweight, accessible, no opinions |
 | Testing | Vitest + Testing Library | Fast, Jest-compatible, Vite-native |
 | Fonts | Google Fonts (Fraunces + Fira Sans) | Matches editorial "travel journal" brief |
+| Backend | Vercel Serverless Functions + Resend | Zero-infra form delivery, colocated with frontend |
 
 ## Pages & Routes
 
@@ -136,6 +137,21 @@ All design tokens live in `src/styles/variables.css` and are consumed globally v
 
 Hero and card overlays use the same contrast-boost technique with `mix-blend-mode: screen` for dark backgrounds.
 
+## Backend — Serverless Form Delivery
+
+Form submissions are delivered via **Vercel Serverless Functions** colocated in `api/`. Each function validates the request body and forwards it as a transactional email via the [Resend](https://resend.com) API.
+
+```
+frontend/
+  api/
+    contact.ts        → POST /api/contact       (InquiryForm)
+    partnership.ts    → POST /api/partnership   (PartnershipForm)
+```
+
+Vercel automatically routes `/api/*` to these functions before the SPA catch-all in `vercel.json` fires — no routing config changes needed.
+
+**Status:** Planned (Phase 10) — see [plan.md](../plan.md) for full to-do list.
+
 ## Forms
 
 Both forms (`PartnershipForm`, `InquiryForm`) use local React state only — no external service. Validation runs on submit; field errors clear on correction. On success, the form is replaced with a confirmation message.
@@ -147,7 +163,18 @@ Both forms (`PartnershipForm`, `InquiryForm`) use local React state only — no 
 
 ## Environment Variables
 
-No environment variables are required. The site is entirely static with no backend calls.
+For local development with no backend, no variables are needed — forms simulate submission.
+
+To enable real form delivery (Phase 10), add the following to a `.env.local` file (never commit this):
+
+```bash
+# .env.local
+RESEND_API_KEY=re_xxxxxxxxxxxx
+```
+
+On Vercel: **Project Settings → Environment Variables** → add `RESEND_API_KEY` for Production + Preview.
+
+The key is used exclusively inside `api/contact.ts` and `api/partnership.ts` (serverless functions) — it is never exposed to the browser bundle.
 
 ## Production Build
 
@@ -244,12 +271,12 @@ Test Files  6 passed (6)
 **Real photography**
 Replace CSS color-block placeholders with actual trip photography. The grain overlay system is already wired — dropping in real images immediately elevates the aesthetic.
 
-**Form backend**
-Connect `PartnershipForm` and `InquiryForm` to a real delivery layer:
-- [Resend](https://resend.com) — email API, minimal setup
-- [EmailJS](https://emailjs.com) — no backend needed, client-side
-- [Formspree](https://formspree.io) — zero-config drop-in
-- Custom Express/FastAPI endpoint for full control
+**Form backend** *(Phase 10 — in progress)*
+Connect `PartnershipForm` and `InquiryForm` to real email delivery via Vercel Serverless Functions + [Resend](https://resend.com):
+- `api/contact.ts` → `POST /api/contact`
+- `api/partnership.ts` → `POST /api/partnership`
+- One env var: `RESEND_API_KEY` (free tier: 3,000 emails/month)
+- No separate server needed — functions deploy alongside the frontend
 
 **Booking / availability**
 The "Book Your Spot" CTA currently links to `/contact`. A real booking flow — Calendly embed, Typeform, or a custom step-form — would convert visitors rather than lose them.

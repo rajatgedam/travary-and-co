@@ -1,4 +1,4 @@
-# Travel Web — Project Plan
+# Travary & Co. — Project Plan
 
 ## Problem Statement
 
@@ -33,12 +33,14 @@ Build a minimal, high-end travel website with a **"crushed paper" / parchment ae
 ## Tech Stack
 
 - **Framework:** React 19 + Vite + TypeScript
-- **Routing:** React Router DOM v6 (URL-based — public website convention)
+- **Routing:** React Router DOM v7 (URL-based — public website convention)
 - **Styling:** Plain CSS + CSS custom properties (design tokens)
 - **Fonts:** Google Fonts — Fraunces + Fira Sans
 - **Carousel:** Embla Carousel
 - **Testing:** Vitest + React Testing Library
 - **Linting:** ESLint + TypeScript strict mode
+- **Deployment:** Vercel (static SPA, `vercel.json` rewrite rule)
+- **Backend (Phase 9):** Vercel Serverless Functions (`api/`) + Resend email API
 
 ---
 
@@ -164,3 +166,76 @@ travel-web/
 | 2026-05-05 | Phase 6 | ✅ Complete | Contact page — Channels, Inquiry Form |
 | 2026-05-05 | Phase 7 | ✅ Complete | Responsive breakpoints, grain overlays, ARIA, transitions |
 | 2026-05-05 | Phase 8 | ✅ Complete | 28/28 tests pass · zero TS errors · production build clean |
+| 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | Crushed paper texture fixed (CSS contrast/brightness technique) |
+| 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | Project renamed: Journey & Co. → Travary & Co. across all files + tests |
+| 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | GitHub repo created: rajatgedam/journey-and-co · pushed to origin |
+| 2026-05-06 | Phase 9 (post-launch) | ✅ Complete | Vercel deployment config verified (vercel.json SPA rewrite, dist gitignored) |
+| 2026-05-06 | Phase 10 | 🔄 Planned | Backend: Vercel Serverless Functions + Resend for form delivery |
+
+---
+
+## Phase 9 — Post-Launch Fixes & Deployment ✅
+
+### 9.1 — Crushed Paper Texture Fix
+- [x] Diagnosed broken SVG noise: `opacity='0.04'` inside SVG made grain invisible
+- [x] Implemented CSS-Tricks technique: SVG at full opacity + `filter: contrast(400%) brightness(150%)` + `mix-blend-mode: multiply`
+- [x] Created `PaperTexture` component with 3 fixed overlay layers:
+  - Fine grain (baseFrequency 0.65, contrast boost)
+  - Coarse crinkle (baseFrequency 0.12, large tiles)
+  - Warm vignette (radial gradient, sienna edges)
+- [x] Fixed hero + carousel overlays (`mix-blend-mode: screen` for dark backgrounds)
+- [x] Removed broken `background-image` noise from `body` in `index.css`
+
+### 9.2 — Project Rename
+- [x] Renamed brand from **Journey & Co.** to **Travary & Co.** across:
+  - `index.html` title tag
+  - `Navbar.tsx`, `Footer.tsx` (brand + copyright)
+  - `OurStorySection.tsx`, `TwoEnginesSection.tsx` (narrative copy)
+  - `DirectChannelsSection.tsx` (email, Instagram, LinkedIn)
+  - `PartnershipForm.tsx` (contact email)
+  - Both `README.md` files (root + frontend/)
+- [x] Updated Navbar and Footer unit tests to match new brand name
+- [x] 28/28 tests still pass after rename
+
+### 9.3 — GitHub & Deployment Setup
+- [x] Created GitHub repo: `rajatgedam/journey-and-co`
+- [x] Pushed all commits to `origin/main`
+- [x] Verified `vercel.json` SPA rewrite rule for React Router
+- [x] Verified `dist/` excluded from git (Vercel builds from source)
+- [x] Documented Vercel deploy steps in README
+
+---
+
+## Phase 10 — Backend: Form Delivery via Vercel Serverless Functions
+
+### Objective
+Replace the current fake form submissions (local React state only) with real email delivery using Vercel Serverless Functions and the [Resend](https://resend.com) email API. No separate server needed — functions live alongside the frontend in `api/`.
+
+### Architecture
+
+```
+frontend/
+  api/
+    contact.ts          ← POST /api/contact  (InquiryForm → hello@travaryandco.com)
+    partnership.ts      ← POST /api/partnership  (PartnershipForm → partnerships@travaryandco.com)
+  src/
+    ...existing code
+  vercel.json           ← /api/* already excluded from SPA rewrite by Vercel
+```
+
+- Vercel routes `/api/*` to serverless functions **before** the `/(.*) → index.html` catch-all fires, so no `vercel.json` changes needed
+- `RESEND_API_KEY` added as a Vercel environment variable (never committed to git)
+- Both functions validate the request body server-side before sending
+
+### To-Do
+
+- [ ] `10.1` Create `frontend/api/contact.ts` — POST handler, validates fields, sends via Resend to `hello@travaryandco.com`
+- [ ] `10.2` Create `frontend/api/partnership.ts` — POST handler, sends to `partnerships@travaryandco.com`
+- [ ] `10.3` Add `RESEND_API_KEY` to Vercel environment variables (dashboard → Settings → Environment Variables)
+- [ ] `10.4` Update `InquiryForm.tsx` — replace fake submit with `fetch('/api/contact', { method: 'POST', body: JSON.stringify(fields) })`
+- [ ] `10.5` Update `PartnershipForm.tsx` — replace fake submit with `fetch('/api/partnership', ...)`
+- [ ] `10.6` Add loading state to both forms (disable submit button, show spinner while fetch is in flight)
+- [ ] `10.7` Add server error handling to both forms (show error message if API returns non-2xx)
+- [ ] `10.8` Write unit tests for both updated forms (mock `fetch`, test loading + error + success states)
+- [ ] `10.9` Add `@types/node` dev dependency (required for Vercel function TypeScript)
+- [ ] `10.10` Verify end-to-end in Vercel preview deployment before promoting to production
