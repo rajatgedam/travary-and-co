@@ -17,6 +17,7 @@ High-end travel website with a "crushed paper" / parchment aesthetic. Built with
 - [Browser Support](#browser-support)
 - [Contributing](#contributing)
 - [Test Coverage](#test-coverage)
+- [Future Improvements](#future-improvements)
 
 ## Quick Start
 
@@ -229,6 +230,77 @@ Test Files  6 passed (6)
 | PolaroidCard | `tests/components/PolaroidCard.test.tsx` | Name, role, initials, accessible figure label |
 | PartnershipForm | `tests/sections/PartnershipForm.test.tsx` | Required field validation, email format, error clearing, success state |
 | InquiryForm | `tests/sections/InquiryForm.test.tsx` | Required field validation, email format, error clearing, success state |
+
+## Future Improvements
+
+### High Priority
+
+**Real photography**
+Replace CSS color-block placeholders with actual trip photography. The grain overlay system is already wired — dropping in real images immediately elevates the aesthetic.
+
+**Form backend**
+Connect `PartnershipForm` and `InquiryForm` to a real delivery layer:
+- [Resend](https://resend.com) — email API, minimal setup
+- [EmailJS](https://emailjs.com) — no backend needed, client-side
+- [Formspree](https://formspree.io) — zero-config drop-in
+- Custom Express/FastAPI endpoint for full control
+
+**Booking / availability**
+The "Book Your Spot" CTA currently links to `/contact`. A real booking flow — Calendly embed, Typeform, or a custom step-form — would convert visitors rather than lose them.
+
+---
+
+### Medium Priority
+
+**CMS for trip content**
+Trip data is currently hardcoded. Moving it to a headless CMS ([Contentful](https://contentful.com), [Sanity](https://sanity.io), or a fetched JSON file) lets non-developers update destinations, dates, and copy without touching code.
+
+**Per-page SEO & meta tags**
+Add `react-helmet-async` for per-page `<title>`, `<meta description>`, and Open Graph tags. All 4 pages currently share the same `<title>` from `index.html`.
+
+**Image optimization**
+Add `vite-plugin-image-optimizer` or serve images via Vercel's built-in image CDN (`/_vercel/image`). Add `loading="lazy"` on carousel images.
+
+**Scroll-triggered animations**
+The parchment aesthetic suits subtle entrance animations. Use [Motion](https://motion.dev) or CSS `@keyframes` with `IntersectionObserver` for scroll-triggered reveals.
+
+---
+
+### Lower Priority
+
+**Trip detail pages**
+Dynamic routes (e.g. `/trips/patagonia-traverse`) with full itinerary, pricing, gallery, and a booking CTA. Requires a CMS or data layer.
+
+**Dark mode**
+The design token system in `variables.css` is already structured for it. A `@media (prefers-color-scheme: dark)` block swapping parchment tones to a dark ink palette would be straightforward.
+
+**Internationalisation (i18n)**
+`react-i18next` integrates cleanly with the existing component structure for multi-language support.
+
+**Analytics**
+Add [Vercel Analytics](https://vercel.com/analytics) (one line, privacy-friendly, free tier) or [Plausible](https://plausible.io) to understand which pages and CTAs get traffic.
+
+**CI/CD pipeline**
+GitHub Actions workflow that runs tests and build on every PR before Vercel deploys a preview:
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+        working-directory: frontend
+      - run: npm test
+        working-directory: frontend
+      - run: npm run build
+        working-directory: frontend
+```
 
 ## Browser Support
 
