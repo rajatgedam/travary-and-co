@@ -12,7 +12,7 @@ export default function OurStorySection() {
         </div>
         <div className="our-story__body">
           <p>
-            Journey &amp; Co. didn't start in a boardroom. It started with a
+            Travary &amp; Co. didn't start in a boardroom. It started with a
             broken-down van in southern Morocco, a group of twelve people who
             didn't know each other, and a shared decision to make the best of
             it. That trip became the blueprint.

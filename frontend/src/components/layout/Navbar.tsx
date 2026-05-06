@@ -16,7 +16,7 @@ export default function Navbar() {
     <nav className="navbar" aria-label="Main navigation">
       <div className="container navbar__inner">
         <NavLink to="/" className="navbar__brand" onClick={() => setOpen(false)}>
-          Journey &amp; Co.
+          Travary &amp; Co.
         </NavLink>
 
         <button

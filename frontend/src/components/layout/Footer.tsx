@@ -18,7 +18,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer__inner">
           <div>
-            <span className="footer__brand">Journey &amp; Co.</span>
+            <span className="footer__brand">Travary &amp; Co.</span>
             <p className="footer__tagline">
               Curated journeys for the modern explorer — from soul-stirring
               group tours to white-glove corporate logistics.
@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <span>© {new Date().getFullYear()} Journey &amp; Co. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Travary &amp; Co. All rights reserved.</span>
           <span>Made for the road less traveled.</span>
         </div>
       </div>

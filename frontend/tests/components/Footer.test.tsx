@@ -6,7 +6,7 @@ import Footer from '../../src/components/layout/Footer';
 describe('Footer', () => {
   it('renders the brand name', () => {
     render(<Footer />);
-    expect(screen.getAllByText(/journey/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/travary/i).length).toBeGreaterThan(0);
   });
 
   it('renders the newsletter label', () => {

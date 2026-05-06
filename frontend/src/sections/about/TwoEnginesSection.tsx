@@ -7,7 +7,7 @@ export default function TwoEnginesSection() {
         <div className="two-engines__header">
           <h2>Two Engines. One Direction.</h2>
           <p>
-            Journey &amp; Co. operates two complementary brands — each with a
+            Travary &amp; Co. operates two complementary brands — each with a
             distinct focus, united by the same commitment to craft.
           </p>
         </div>

@@ -2,10 +2,10 @@ import type { ContactChannel } from '../../types';
 import './DirectChannelsSection.css';
 
 const CHANNELS: ContactChannel[] = [
-  { id: 'email', label: 'Email', value: 'hello@journeyandco.com', href: 'mailto:hello@journeyandco.com', type: 'email' },
+  { id: 'email', label: 'Email', value: 'hello@travaryandco.com', href: 'mailto:hello@travaryandco.com', type: 'email' },
   { id: 'whatsapp', label: 'WhatsApp', value: '+1 555 000 1234', href: 'https://wa.me/15550001234', type: 'whatsapp' },
-  { id: 'instagram', label: 'Instagram', value: '@journeyandco', href: 'https://instagram.com/journeyandco', type: 'instagram' },
-  { id: 'linkedin', label: 'LinkedIn', value: 'Journey & Co.', href: 'https://linkedin.com/company/journeyandco', type: 'linkedin' },
+  { id: 'instagram', label: 'Instagram', value: '@travaryandco', href: 'https://instagram.com/travaryandco', type: 'instagram' },
+  { id: 'linkedin', label: 'LinkedIn', value: 'Travary & Co.', href: 'https://linkedin.com/company/travaryandco', type: 'linkedin' },
 ];
 
 const ICONS: Record<ContactChannel['type'], React.ReactNode> = {

@@ -11,7 +11,7 @@ function renderWithRouter(ui: React.ReactElement) {
 describe('Navbar', () => {
   it('renders the brand name', () => {
     renderWithRouter(<Navbar />);
-    expect(screen.getByText(/journey/i)).toBeInTheDocument();
+    expect(screen.getByText(/travary/i)).toBeInTheDocument();
   });
 
   it('renders all 4 navigation links', () => {

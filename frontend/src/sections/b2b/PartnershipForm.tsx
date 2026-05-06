@@ -65,7 +65,7 @@ export default function PartnershipForm() {
           <ul className="partnership-form-section__channels">
             <li className="partnership-form-section__channel">
               <span>Email</span>
-              <a href="mailto:partnerships@journeyandco.com">partnerships@journeyandco.com</a>
+              <a href="mailto:partnerships@travaryandco.com">partnerships@travaryandco.com</a>
             </li>
             <li className="partnership-form-section__channel">
               <span>WhatsApp</span>
